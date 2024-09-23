@@ -1,3 +1,10 @@
+/**********************************************************************
+ * @file: Proj1.java
+ * @description: Main file to run program and make it executable from the command line.
+ * @author: Kate Choi
+ * @date: 18 September 2024
+ **********************************************************************/
+
 import java.io.FileNotFoundException;
 
 public class Proj1 {
