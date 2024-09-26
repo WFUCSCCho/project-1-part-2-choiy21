@@ -14,24 +14,20 @@ public class BST<E extends Comparable<E>> implements Iterable<E> {
     private Node<E> root;
     private int nodecount;
 
-    // Implement the constructor
     public BST() {
         root = null;
         nodecount = 0;
     }
 
-    // Implement the clear method
     public void clear() {
         root = null;
         nodecount = 0;
     }
 
-    // Implement the size method
     public int size() {
         return nodecount;
     }
 
-    // Implement the insert method
     public void insert(E e) {
         root = inserthelp(root, e);
         nodecount++;
@@ -49,7 +45,6 @@ public class BST<E extends Comparable<E>> implements Iterable<E> {
         return rt;
     }
 
-    // Implement the remove method
     public Node<E> remove(E e) {
         root = removehelp(root, e);
         return root;
@@ -84,7 +79,6 @@ public class BST<E extends Comparable<E>> implements Iterable<E> {
         return min;
     }
 
-    // Implement the search method
     public Node<E> search(E e) {
         return searchhelp(root, e);
     }
@@ -100,16 +94,19 @@ public class BST<E extends Comparable<E>> implements Iterable<E> {
         }
     }
 
-    // Implement the iterator method
-    public Iterator<E> iterator() { return new BSTIterator<>(root); }
-
+    @Override
+    public Iterator<E> iterator() {
+        return new BSTIterator<>(root);
+    }
 }
-
-// Implement the BSTIterator class
 
 class BSTIterator<E extends Comparable<E>> implements Iterator<E> {
     private Stack<Node<E>> stack = new Stack<>();
-    public BSTIterator(Node<E> rt) { pushAll(rt); }
+
+    public BSTIterator(Node<E> rt) {
+        pushAll(rt);
+    }
+
     private void pushAll(Node<E> n) {
         while (n != null) {
             stack.push(n);
@@ -117,10 +114,17 @@ class BSTIterator<E extends Comparable<E>> implements Iterator<E> {
         }
     }
 
-    public boolean hasNext() { return !stack.isEmpty(); }
+    @Override
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+
+    @Override
     public E next() {
         Node<E> temp = stack.pop();
         pushAll(temp.getRight());
         return temp.getElement();
     }
 }
+
+

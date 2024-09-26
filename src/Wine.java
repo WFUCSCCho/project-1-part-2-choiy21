@@ -1,76 +1,83 @@
-public class Wine {
-    private double fixed_acidity, volatile_acidity, citric_acid, residual_sugar, chlorides, free_sulfur_dioxide, total_sulfur_dioxide, density, pH, sulphates, alcohol, quality;
+public class Wine implements Comparable<Wine> {
+    private String title, capacity, grape, closure, country, characteristics, type, ABV, region, style, vintage;
+    private double price;
 
-
-    // default constructor
     public Wine() {
-        fixed_acidity = 0.0;
-        volatile_acidity = 0.0;
-        citric_acid = 0.0;
-        residual_sugar = 0.0;
-        chlorides = 0.0;
-        free_sulfur_dioxide = 0.0;
-        total_sulfur_dioxide = 0.0;
-        density = 0.0;
-        pH = 0.0;
-        sulphates = 0.0;
-        alcohol = 0.0;
-        quality = 0.0;
+        title = "";
+        price = 0.0;
+        capacity = "";
+        grape = "";
+        closure = "";
+        country = "";
+        characteristics = "";
+        type = "";
+        ABV = "";
+        region = "";
+        style = "";
+        vintage = "";
     }
 
-    // parameterized constructor
-    public Wine(double fixed_acidity, double volatile_acidity, double citric_acid, double residual_sugar, double chlorides, double free_sulfur_dioxide, double total_sulfur_dioxide, double density, double pH, double sulphates, double alcohol, double quality) {
-        this.fixed_acidity = fixed_acidity;
-        this.volatile_acidity = volatile_acidity;
-        this.citric_acid = citric_acid;
-        this.residual_sugar = residual_sugar;
-        this.chlorides = chlorides;
-        this.free_sulfur_dioxide = free_sulfur_dioxide;
-        this.total_sulfur_dioxide = total_sulfur_dioxide;
-        this.density = density;
-        this.pH = pH;
-        this.sulphates = sulphates;
-        this.alcohol = alcohol;
-        this.quality = quality;
+    public Wine(String title, double price, String capacity, String grape, String closure, String country,
+                String characteristics, String type, String ABV, String region, String style, String vintage) {
+        this.title = title;
+        this.price = price;
+        this.capacity = capacity;
+        this.grape = grape;
+        this.closure = closure;
+        this.country = country;
+        this.characteristics = characteristics;
+        this.type = type;
+        this.ABV = ABV;
+        this.region = region;
+        this.style = style;
+        this.vintage = vintage;
     }
 
-    // copy constructor
-    public Wine(Wine w) {
-        fixed_acidity = w.fixed_acidity;
-        volatile_acidity = w.volatile_acidity;
-        citric_acid = w.citric_acid;
-        residual_sugar = w.residual_sugar;
-        chlorides = w.chlorides;
-        free_sulfur_dioxide = w.free_sulfur_dioxide;
-        total_sulfur_dioxide = w.total_sulfur_dioxide;
-        density = w.density;
-        pH = w.pH;
-        sulphates = w.sulphates;
-        alcohol = w.alcohol;
-        quality = w.quality;
-    }
-
-    // getters
-
-    public double getFixed_acidity() { return fixed_acidity; }
-    public double getVolatile_acidity() { return volatile_acidity; }
-
-    public double getCitric_acid() { return citric_acid; }
-    public double getResidual_sugar() { return residual_sugar; }
-    public double getChlorides() { return chlorides; }
-    public double getFree_sulfur_dioxide() { return free_sulfur_dioxide; }
-    public double getTotal_sulfur_dioxide() { return total_sulfur_dioxide; }
-    public double getDensity() { return density; }
-    public double getpH() { return pH; }
-    public double getSulphates() { return sulphates; }
-    public double getAlcohol() { return alcohol; }
-    public double getQuality() { return quality; }
-
-    // toString method
-    @Override
     public String toString() {
-        return fixed_acidity + "," + volatile_acidity + "," + citric_acid + "," + residual_sugar + "," + chlorides + ","
-                + free_sulfur_dioxide + "," + total_sulfur_dioxide + "," + density + "," + pH + "," + sulphates + "," +
-                alcohol + "," + quality;
+        return String.format("Wine [Title=%s, Price=%.2f, Capacity=%s, Grape=%s, Closure=%s, Country=%s, Type=%s, ABV=%s, Region=%s, Vintage=%s]",
+                title, price, capacity, grape, closure, country, type, ABV, region, vintage);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Wine wine = (Wine) obj;
+        return Double.compare(wine.price, price) == 0 && title.equals(wine.title);
+    }
+
+    @Override
+    public int compareTo(Wine other) {
+        int priceComparison = Double.compare(this.price, other.price);
+        if (priceComparison != 0) return priceComparison;
+        return this.title.compareTo(other.title);
+    }
+
+    // Getters for attributes
+    public double getPrice() {
+        return price;
+    }
+
+    public String getGrape() {
+        return grape;
+    }
+
+    public String getABV() {
+        return ABV;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public String getVintage() {
+        return vintage;
+    }
+
+
+
 }
