@@ -1,5 +1,9 @@
-search NV
-remove California
+    search  NV
+remove      USa
+
 remove urmom
 
-search 2021
+    search 2021
+
+
+print

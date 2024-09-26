@@ -34,7 +34,7 @@ public class Wine implements Comparable<Wine> {
     }
 
     public String toString() {
-        return String.format("Wine [Title=%s, Price=%.2f, Capacity=%s, Grape=%s, Closure=%s, Country=%s, Type=%s, ABV=%s, Region=%s, Vintage=%s]",
+        return String.format("Title=%s, Price=%.2f, Capacity=%s, Grape=%s, Closure=%s, Country=%s, Type=%s, ABV=%s, Region=%s, Vintage=%s",
                 title, price, capacity, grape, closure, country, type, ABV, region, vintage);
     }
 

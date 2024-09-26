@@ -12,7 +12,7 @@ public class Parser {
     public Parser(String csvFilePath, String commandFilePath) throws FileNotFoundException {
         loadCSV(new File(csvFilePath));  // Load the CSV file into the BST
         process(new File(commandFilePath));  // Process input.txt file commands
-        writeToFile("./result.txt");  // Write all results to the output file at once
+        writeToFile("./output.txt");  // Write all results to the output file at once
     }
 
     // Load CSV data and populate the BST with Wine objects
@@ -41,7 +41,7 @@ public class Parser {
                     Wine wine = new Wine(title, price, capacity, grape, closure, country, characteristics, type, abv, region, style, vintage);
                     mybst.insert(wine);  // Insert wine into the BST
                 } catch (Exception e) {
-                    System.err.println("Error parsing line: " + line);
+                    System.err.println("");
                 }
             }
         }
@@ -65,7 +65,6 @@ public class Parser {
     }
 
     // Execute the command based on the input
-    // Execute the command based on the input
     public void operate_BST(String[] command) {
         if (command.length == 2) {
             switch (command[0].toLowerCase()) {
@@ -87,24 +86,23 @@ public class Parser {
         StringBuilder result = new StringBuilder();
         boolean found = false;
         for (Wine wine : mybst) {
-            if (wine.getVintage().equalsIgnoreCase(value) || wine.getRegion().equalsIgnoreCase(value) || wine.getCountry().equalsIgnoreCase(value)) {
+            if (wine.getVintage().equalsIgnoreCase(value)) {
                 result.append(wine).append("\n");
                 found = true;
             }
         }
         if (found) {
-            results.add("Found: " + result.toString().trim());
+            results.add("found vintage");
         } else {
-            results.add("No matching wines found for: " + value);
+            results.add("search failed");
         }
     }
 
-    // Remove wines based on a single attribute (region, vintage, etc.)
-    // Remove wines based on the region attribute
-    public void remove(String region) {
+    // Remove wines based on the country attribute
+    public void remove(String country) {
         List<Wine> toRemove = new ArrayList<>();
         for (Wine wine : mybst) {
-            if (wine.getRegion().equalsIgnoreCase(region)) {
+            if (wine.getCountry().equalsIgnoreCase(country)) {
                 toRemove.add(wine);
             }
         }
@@ -113,7 +111,7 @@ public class Parser {
             results.add("removed " + wine);
         }
         if (toRemove.isEmpty()) {
-            results.add("No wines removed for region: " + region);
+            results.add("remove failed");
         }
     }
 
@@ -135,7 +133,7 @@ public class Parser {
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
+            System.err.print("Error writing to file: " + e.getMessage());
         }
     }
 }
